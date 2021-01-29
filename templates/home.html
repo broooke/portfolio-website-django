@@ -1,68 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content%}
-<section class="s1">
-	<div class="container">
-		<div class="hello-wrapper">
-			<h1>Hi, I'm Nikita Gaiydenko</h1>
-		</div>
-		<div class="intro-wrapper">
-			<div class="navbar">
-				<div class="dots-wrapper">
-					<div id="dot-1" class="dots">
-					</div>
-					<div id="dot-2" class="dots">
-					</div>
-					<div id="dot-3" class="dots">
-					</div>
-				</div>
-				<ul id="nav">
-					<li><a href="">Contact</a></li>
-				</ul>
-			</div>
-			<div class="left-column">
-				<img id="profile_pic" src="{% static 'media/Me1.jpg' %}" alt="">
-				<h5 id="personalize-theme">Personalize Theme</h5>
-				<div class="themes-set-wrapper">
-					<div id="theme-dot-1" class="theme-dots"></div>
-					<div id="theme-dot-2" class="theme-dots"></div>
-					<div id="theme-dot-3" class="theme-dots"></div>
-					<div id="theme-dot-4" class="theme-dots"></div>
-				</div>
-				<p id="settings-note">*Theme settings will be saved for <br>
-				your next vist</p>
-			</div>
-			<div class="right-column">
-				<div id="preview-shadow">
-					<div id="preview">
-						<div id="corner-tl" class="corner"></div>
-						<div id="corner-tr" class="corner"></div>
-						<h3>What I Do</h3>
-						<p>I was a lead developer in a past life, now I enjoy teaching courses.</p>
-						<div id="corner-br" class="corner"></div>
-						<div id="corner-bl" class="corner"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<section class="s2">
-	<div class="container">
-		<h1>Hi, I'm Nikita Gaiydenko</h1>
-	</div>
-</section>
-
-<section class="s1">
-	<div class="container">
-		<h1>Hi, I'm Nikita Gaiydenko</h1>
-	</div>
-</section>
-
-<section class="s2">
-	<div class="container">
-		<h1>Hi, I'm Nikita Gaiydenko</h1>
-	</div>
-</section>
+{% include 'section1.html' %}
+{% include 'section2.html' %}
+{% include 'section3.html' %}
+{% include 'section4.html' %}
 {% endblock %}
