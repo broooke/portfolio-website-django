@@ -1,7 +1,8 @@
 <section class="s2">
 	<div class="container">
 		<h3 style="text-align: center;">Get In Touch</h3>
-		<form id="contact-form">
+		<form id="contact-form" method="post" action="{% url 'send_email' %}">
+			{% csrf_token %}
 			<label>Name</label>
 			<input class="form-field" type="text" name="name">
 
