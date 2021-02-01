@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .forms import signupForm
+from .forms import *
+from .filters import *
+from .models import *
 
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -80,4 +82,12 @@ def signup(request):
 def logOut(request):
 	logout(request)
 	return redirect('login')
+
+def posts(request):
+	posts = Post.objects.all()
+	myFilter = PostFilter(request.GET, queryset=posts)
+	posts = myFilter.qs
+
+	context = {'posts':posts, 'myFilter':myFilter}
+	return render(request, 'posts.html', context)
 
