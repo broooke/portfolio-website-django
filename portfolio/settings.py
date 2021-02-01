@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
 ]
 
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -137,16 +139,6 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media/')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-CKEDITOR_UPLOAD_PATH = 'uploads/'
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-        'height': 300,
-        'width': '100%',
-    },
-}
 
 # Sending email
 

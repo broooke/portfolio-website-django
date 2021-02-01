@@ -1,4 +1,25 @@
 {% extends 'main.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-
+<style type="text/css">
+	#div_id_tags, #id_tags{
+		overflow-y: scroll;
+		max-height: 100px;
+		border-radius: 5px;
+		padding: 5px;
+		border:1px solid #888;
+	}
+</style>
+<div class="container">
+	<div>
+		<h2>Create|Update Post</h2>
+		<a class="btn btn-sm btn-primary" href="{% url 'posts' %}">&laquo Back to Posts</a>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{form.media}}
+			{{form|crispy}}
+			<input class="btn btn-primary" type="submit">
+		</form>
+	</div>
+</div>
 {% endblock %}

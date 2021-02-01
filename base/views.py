@@ -91,3 +91,45 @@ def posts(request):
 	context = {'posts':posts, 'myFilter':myFilter}
 	return render(request, 'posts.html', context)
 
+def postDetail(request, post_name):
+	post = Post.objects.get(headline=post_name)
+
+	context = {'post':post}
+
+	return render(request, 'post_detail.html', context)
+
+def createPost(request):
+	if request.method == 'POST':
+		form = postForm(request.POST, request.FILES)
+		if form.is_valid():
+			form = form.save(commit=False)
+			form.save()
+			return redirect('posts')
+		else:
+			messages.error(request,'The form is not valid')
+	else:
+		form = postForm()
+
+	context = {'form':form}
+
+	return render(request, 'create_post.html', context)
+
+def editPost(request, post_name):
+	post = Post.objects.get(headline=post_name)
+	if request.method == 'POST':
+		form = postForm(request.POST, request.FILES, instance=post)
+		if form.is_valid():
+			form.save()
+			return redirect('posts')
+		else:
+			messages.error(request, 'The form is not valid')
+	else:
+		form = postForm(instance=post)
+
+	context = {'form':form}
+
+	return render(request, 'create_post.html', context)
+
+
+
+

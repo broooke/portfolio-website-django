@@ -1,5 +1,6 @@
 from django.db import models
 
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -15,8 +16,8 @@ class Post(models.Model):
 	sub_headline = models.CharField(max_length=500, null=True)
 	picture = models.ImageField(null=True, upload_to='images', default='default.png')
 	tags = models.ManyToManyField(Tag, null=True, blank=True)
-
-
+	body = RichTextUploadingField(null=True, blank=True)
+	
 	def __str__(self):
 		return self.headline
 
