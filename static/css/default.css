@@ -445,6 +445,13 @@ ul{
 	box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
 }
 
+.post-container{
+	width: 900px;
+	margin: 0 auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
 
 /*Media screen settings*/
 @media screen and (max-width: 1200px){

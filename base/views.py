@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import *
 from .filters import *
 from .models import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.core.mail import EmailMessage
 from django.conf import settings
@@ -61,8 +62,8 @@ def signup(request):
 	if request.method == 'POST':
 		form = signupForm(request.POST)
 		if form.is_valid():
+			print(user.username)
 			user = form.save(commit=False)
-			user.username = user.first_name + " " + user.last_name
 			user.save()
 			messages.success(request, 'Account successfully created!')
 
@@ -88,11 +89,30 @@ def posts(request):
 	myFilter = PostFilter(request.GET, queryset=posts)
 	posts = myFilter.qs
 
+	page = request.GET.get('page')
+	paginator = Paginator(posts, 3)
+	try:
+		posts = paginator.page(page)
+	except PageNotAnInteger:
+		posts = paginator.page(1)
+	except EmptyPage:
+		posts = paginator.page(paginator.num_pages)
+
 	context = {'posts':posts, 'myFilter':myFilter}
+
 	return render(request, 'posts.html', context)
 
 def postDetail(request, post_name):
 	post = Post.objects.get(headline=post_name)
+
+	if request.method == 'POST':
+		text = request.POST.get('comment')
+		user = request.user.profile
+		PostComment.objects.create(
+			author = user,
+			post = post,
+			body = text,
+			)
 
 	context = {'post':post}
 
@@ -130,6 +150,19 @@ def editPost(request, post_name):
 
 	return render(request, 'create_post.html', context)
 
+def profile(request, user_name):
+	user = request.user.profile
+	form = profileForm(instance=user)
+	if request.method == 'POST':
+		form = profileForm(request.POST, request.FILES, instance=user)
+		if form.is_valid():
+			form.save()
+			messages.success(request, "Profile updated!")
+			return redirect('profile', request.user.email)
+
+	context = {'user':user, 'form':form}
+
+	return render(request, 'profile.html', context)
 
 
 
